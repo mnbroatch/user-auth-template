@@ -8,7 +8,7 @@ const bcrypt = require('bcryptjs');
 let userSchema = new mongoose.Schema({
 	username: {type:String, required:true},
 	password: {type:String, required:true},
-	things: [{type:mongoose.Schema.Types.ObjectId}]
+	things: [{type:mongoose.Schema.Types.ObjectId, ref: 'Thing'}]
 });
 
 userSchema.statics.authMiddleware = function(req,res,next){

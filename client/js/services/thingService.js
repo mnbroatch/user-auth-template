@@ -1,7 +1,7 @@
 "use strict;"
 
 angular.module('user-auth')
-.service('thingService', function($http,$rootScope){
+.service('thingService', function($http){
 
 
 	this.getAll = () => {
@@ -18,11 +18,25 @@ angular.module('user-auth')
 		});
 	}
 
-	this.addOne = (thing) => {
+	this.getAllOfUser = (userId) => {
+		return $http({
+			method:'GET',
+			url: '/api/things/' + userId
+		})
+		.then( res => {
+			if (res.data)
+				return res.data.things;
+		})
+		.catch(err => {
+			console.log('err: ', err);
+		});
+	}
+
+	this.addOne = (thing,user) => {
 		return $http({
 			method:'POST',
 			url: '/api/things',
-			data: {thing:thing, user:$rootScope.currentUser}
+			data: {thing:thing, user:user}
 		})
 		.then( res => {
 			if (res.data){

@@ -1,25 +1,23 @@
 "use strict;"
 
 angular.module('user-auth')
-.controller('thingController', function($scope,$http,thingService) {
+.controller('thingController', function($scope,$http,thingService,$rootScope) {
 
 	$scope.thingArray =[];
 
-	thingService.getAll()
+	thingService.getAllOfUser($rootScope.currentUser._id)
 	.then( function(things){
+		console.log('things',things);
 		if(things) {
-			$scope.thingArray.push(...things);
+			$scope.thingArray = things;
 		}
 	})
 	.catch( err => {
 		console.log(err);
 	});
 
-
-
-
 	$scope.addOneThing = function(thing){
-		thingService.addOne(thing)
+		thingService.addOne(thing,$rootScope.currentUser)
 		.then( function(newThing){
 			if(newThing) $scope.thingArray.push(newThing);
 		})

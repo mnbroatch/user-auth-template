@@ -1,12 +1,12 @@
-let mongoose = require('mongoose');
+const mongoose = require('mongoose');
 
 
-let thingSchema = new mongoose.Schema({
-	name: String
+const thingSchema = new mongoose.Schema({
+  name: String,
 });
 
 
-let Thing = mongoose.model('Thing', thingSchema);
+const Thing = mongoose.model('Thing', thingSchema);
 
 module.exports = Thing;
 

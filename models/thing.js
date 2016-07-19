@@ -2,7 +2,10 @@ const mongoose = require('mongoose');
 
 
 const thingSchema = new mongoose.Schema({
+  yelpId: String,
+  numFavorites: Number,
   name: String,
+  users: [{ type: mongoose.Schema.Types.ObjectId, ref: 'User' }],
 });
 
 

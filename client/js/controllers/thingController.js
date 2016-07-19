@@ -24,9 +24,11 @@ function thingController($scope, $http, thingService, $rootScope) {
 
   $scope.removeOneThing = function (thing) {
     const index = $scope.thingArray.indexOf(thing);
-    thingService.removeOne(thing)
+    thingService.removeOne(thing, $rootScope.currentUser)
     .then(() => {
+      console.log($scope.thingArray)
       $scope.thingArray.splice(index, 1);
+      console.log($scope.thingArray)
     })
     .catch(err => {
       console.log(err);

@@ -34,6 +34,17 @@ router.route('/:id')
   });
 });
 
+router.route('/removeThing/:id')
+.put((req, res) => {
+  console.log('thi',req.body.thing);
+  User.findById(req.params.id, (err,user) => {
+    user.things.splice(user.things.indexOf(req.body.thing._id),1);
+    user.save();
+    return res.send();
+  })
+})
+
+
 
 module.exports = router;
 

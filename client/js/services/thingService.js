@@ -32,12 +32,29 @@ function thingService($http) {
   )
   .catch(err => { console.log('err: ', err); });
 
-  this.removeOne = (thing) => {
-    $http({
-      method: 'DELETE',
-      url: `/api/things/${thing._id}`,
+  this.removeOne = (thing, user) => {
+    return $http({
+      method: 'PUT',
+      url: `/api/users/removeThing/${user._id}`,
+      data: { thing }
+    })
+    .then(() => {
+      $http({
+        method: 'DELETE',
+        url: `/api/things/${thing._id}`,
+      })
     });
   };
+
+  this.getThing = id =>
+  $http({
+    method: 'GET',
+    url: `/api/things/yelpId/${id}`,
+  })
+  .then(res => {
+    console.log('redata',res.data);
+    return res.data || null;
+  })
 
   this.editOne = (thing) =>
   $http({
@@ -49,7 +66,7 @@ function thingService($http) {
     res.data || null
   )
   .catch(err => { console.log('err: ', err); });
-}
+};
 
 angular.module('user-auth')
 .service('thingService', thingService);

@@ -1,19 +1,10 @@
-const app = angular.module('user-auth', ['ui.bootstrap', 'ui.router', 'xeditable', 'ngCookies']);
+const app = angular.module('user-auth', ['ui.bootstrap', 'ui.router', 'ngCookies']);
 
 function module($stateProvider, $urlRouterProvider) {
   $stateProvider
   .state('home', {
     url: '/home',
     templateUrl: '/html/home.html',
-  })
-  .state('user', {
-    url: '/user',
-    templateUrl: 'html/user.html',
-    controller: 'userController',
-    resolve: {
-      authorize: authService =>
-      authService.authorize(),
-    },
   })
   .state('thing', {
     url: '/thing',
@@ -33,7 +24,24 @@ function module($stateProvider, $urlRouterProvider) {
     url: '/register',
     templateUrl: '/html/loginregister.html',
     controller: 'loginRegisterController',
+  })
+  .state('search', {
+    url: '/search',
+    templateUrl: '/html/search.html',
+    controller: 'searchController',
+  })
+  .state('business', {
+    url: '/business/:id',
+    templateUrl: '/html/business.html',
+    controller: 'businessController',
+    resolve: {
+      Business: (yelpService,$stateParams) =>
+      yelpService.getOne($stateParams.id),
+    },
   });
+
+
+
 
   $urlRouterProvider.otherwise('/home');
 }

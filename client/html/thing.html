@@ -8,8 +8,7 @@
       <th>Thing Name</th>
     </thead>
     <colgroup>
-      <col style="width:60%">
-      <col style="width:20%">
+      <col style="width:80%">
       <col style="width:20%">
     </colgroup>  
 
@@ -18,9 +17,6 @@
         <a ui-sref="business({ id: thing.yelpId })">
           {{ thing.name }}
         </a>
-      </td>
-      <td>
-          {{ thing.users }}
       </td>
       <td>
         <button class="delete-button btn btn-danger " ng-click="removeOneThing(thing)">
